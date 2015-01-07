@@ -17,7 +17,7 @@ class NodeOps(CommonOps):
     """Common key-value functions."""
 
     @translate_exceptions
-    def get(self, path, force_consistent=False, force_quorum=False):
+    def get(self, path, force_consistent=False, force_quorum=False, recursive=False):
         """Get the given node.
 
         :param path: Node key
@@ -39,6 +39,9 @@ class NodeOps(CommonOps):
 
         if force_quorum is True:
             parameters['quorum'] = 'true'
+
+        if recursive is True:
+            parameters['recursive'] = 'true'
 
         fq_path = self.get_fq_node_path(path)
         return self.client.send(2, 'get', fq_path, parameters=parameters)
