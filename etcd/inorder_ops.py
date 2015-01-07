@@ -64,7 +64,8 @@ class _InOrder(CommonOps):
         if sorted is True:
             parameters['sorted'] = 'true'
 
-        return self.client.send(2, 'get', self.__path, parameters=parameters)
+        fq_path = self.get_fq_node_path(self.__path)
+        return self.client.send(2, 'get', fq_path, parameters=parameters)
 
 
 class InOrderOps(CommonOps):
